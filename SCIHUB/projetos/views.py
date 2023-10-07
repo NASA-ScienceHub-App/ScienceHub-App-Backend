@@ -79,6 +79,9 @@ class PublicacaoApiView(APIView):
         for pub in pubs:
             json = {}
             json["projeto"] = pub.projeto
+            proj = Projeto.objects.get(codigo=pub.projeto)
+            pesquer = Pesquisador.objects.get(proj.dono)
+            json["autor"] = pesquer.nome
             json["tipo"] = pub.tipo
             json["titulo"] = pub.titulo
             json["descricao"] = pub.descricao
