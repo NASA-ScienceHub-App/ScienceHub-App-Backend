@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from pesquisadores.models import Pesquisador
 from habilidades.views import _cadastrar_habilidade
+from habilidades.views import _get_habilidades_pub
 # Create your views here.
 
 from rest_framework.views import APIView
@@ -47,7 +48,13 @@ class ProjetoApiView(APIView):
         proj = Projeto.objects.get(dono=pesquer, nome=dados["nome"])
         serializer = ProjetoSerializer(proj, context={'request': request}, many=False)
         return Response(serializer.data)
+
     
+    @api_view(['POST'])
+    def apagar_projetos(request):
+        pass
+    
+class PublicacaoApiView(APIView):
     @api_view(['POST'])
     def cadastrar_publicacao(request):
         dados = request.data
@@ -68,11 +75,14 @@ class ProjetoApiView(APIView):
         pesquer = Pesquisador.objects.get(apelido=dados["apelido"])
         proj = Projeto.objects.filter().exclude(dono=pesquer)
         pubs = Publicacao.objects.filter(projeto__in=proj)
-        #TODO: tem que pegar as habilidades de cada pub, e colocar junto de alguma forma
+        pubs_feed = []
+        for pub in pubs:
+            json = {}
+            json["projeto"] = pub.projeto
+            json["tipo"] = pub.tipo
+            json["titulo"] = pub.titulo
+            json["descricao"] = pub.descricao
+            json["habilidades"] = _get_habilidades_pub(pub=pub)
+            pubs_feed.append(json)
         
-        serializer = PublicacaoSerializer(pubs, context={'request': request}, many=True)
-        return Response(serializer.data)
-    
-    @api_view(['POST'])
-    def apagar_projetos(request):
-        pass
+        return Response(pubs_feed, status=status.HTTP_200_OK)

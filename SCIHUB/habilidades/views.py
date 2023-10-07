@@ -18,7 +18,7 @@ def _get_habilidades_pub(pub):
     return HabilidadeRequeridaSerializer(habs, many=True).data
     
 
-class ProjetoApiView(APIView):
+class HabilidadeApiView(APIView):
     @api_view(['POST'])
     def cadastrar_habilidade(request):
         dados = request.data
@@ -27,7 +27,7 @@ class ProjetoApiView(APIView):
         return Response("Project created", status=status.HTTP_201_CREATED)
     
     @api_view(['POST'])
-    def pegar_habilidades_pubs(request):
+    def pegar_habilidades_pub(request):
         dados = request.data
         pub = Publicacao.objects.get(codigo=dados["publicacao"])
         return Response(_get_habilidades_pub(), status=status.HTTP_200_OK)
