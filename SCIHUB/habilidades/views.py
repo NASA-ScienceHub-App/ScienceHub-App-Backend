@@ -7,15 +7,17 @@ from projetos.models import Publicacao
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 
-def _cadastrar_habilidade(pub, habilidade, nivel):
+def _cadastrar_habilidade(pub, habilidade, nivel, tipo="publicacao"):
     HabilidadeRequerida.objects.create(publicacao=pub,
                                        habilidade=habilidade,
+                                       tipo=tipo,
                                        nivel_da_habilidade=nivel)
     return True
-    
+
 def _get_habilidades_pub(pub):
     habs = HabilidadeRequerida.objects.filter(publicacao=pub, tipo="publicacao")
     return HabilidadeRequeridaSerializer(habs, many=True).data
+
     
 
 class HabilidadeApiView(APIView):

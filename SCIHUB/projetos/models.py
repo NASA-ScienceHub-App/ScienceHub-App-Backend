@@ -28,7 +28,7 @@ class Publicacao(models.Model):
         ("Recrutamento", "Recrutamento")
     ]
     projeto = models.ForeignKey(Projeto,on_delete=models.CASCADE)
-    tipo = models.CharField(max_length=50, choices=TIPOS),
+    tipo = models.CharField(max_length=50, choices=TIPOS)
     titulo = models.CharField(max_length=127)
     descricao = models.CharField(max_length=255, blank=True)
     
