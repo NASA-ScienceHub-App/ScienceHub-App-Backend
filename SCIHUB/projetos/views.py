@@ -79,7 +79,7 @@ class PublicacaoApiView(APIView):
     @api_view(['POST'])
     def pegar_pubs_feed_pesquisador(request):
         dados = request.data
-        pesquer = Pesquisador.objects.get(apelido=dados["apelido"])
+        #pesquer = Pesquisador.objects.get(apelido=dados["apelido"])
         proj = Projeto.objects.filter()
         pubs = Publicacao.objects.filter(projeto__in=proj)
         pubs_feed = []
