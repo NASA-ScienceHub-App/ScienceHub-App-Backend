@@ -34,18 +34,39 @@ class PesquisadorApiView(APIView):
     
     @api_view(['POST'])
     def adicionar_indicacao_pesquisador(request):
-        #TODO: implement
-        pass
+        dados = request.data
+        data = {}
+        pesquer = Pesquisador.objects.get(apelido=dados["apelido"])
+        data["inidicacoes"] = pesquer.inidicacoes + 1
+        serializer = PesquisadorSerializer(pesquer, data=data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     @api_view(['POST'])
     def adicionar_contra_indicacao_pesquisador(request):
-        #TODO: implement
-        pass
+        dados = request.data
+        data = {}
+        pesquer = Pesquisador.objects.get(apelido=dados["apelido"])
+        data["contra_indicacoes"] = pesquer.inidicacoes + 1
+        serializer = PesquisadorSerializer(pesquer, data=data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     @api_view(['POST'])
-    def adicionar_contribuicao_pesquisador(request):
-        #TODO: implement
-        pass
+    def adicionar_contribuicao_pesquisador(request): 
+        dados = request.data
+        data = {}
+        pesquer = Pesquisador.objects.get(apelido=dados["apelido"])
+        data["contribuicoes"] = pesquer.inidicacoes + 1
+        serializer = PesquisadorSerializer(pesquer, data=data, context={'request': request})
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     @api_view(['POST'])
     def pegar_pesquisador(request):

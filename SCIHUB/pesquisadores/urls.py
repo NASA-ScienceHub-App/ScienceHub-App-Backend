@@ -7,6 +7,9 @@ from .views import PesquisadorApiView
 
 urlpatterns = [
     path('cadastrar-pesquisador/', PesquisadorApiView.cadastrar_pesquisador, name='cadastrar-pesquisador'),
-    path('pegar-pesquisador/', PesquisadorApiView.pegar_pesquisador, name='pegar-pesquisador')
+    path('pegar-pesquisador/', PesquisadorApiView.pegar_pesquisador, name='pegar-pesquisador'),
+    path('adicionar-indicacao-pesquisador/', PesquisadorApiView.adicionar_indicacao_pesquisador, name='adicionar-indicacao-pesquisador'),
+    path('adicionar-contra_indicacao-pesquisador/', PesquisadorApiView.adicionar_contra_indicacao_pesquisador, name='adicionar-contra-indicacao-pesquisador'),
+    path('adicionar-contribuicao-pesquisador/', PesquisadorApiView.adicionar_contribuicao_pesquisador, name='adicionar-contribuicao-pesquisador'),
     
 ]
