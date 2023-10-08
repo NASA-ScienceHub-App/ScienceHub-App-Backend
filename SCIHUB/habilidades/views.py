@@ -20,7 +20,7 @@ def _get_habilidades_pub(pub):
     return HabilidadeRequeridaSerializer(habs, many=True).data
 
 def _get_habilidades_pesquisador(pesquer):
-    habs = HabilidadeRequerida.objects.filter(publicacao=pesquer, tipo="pesquisador")
+    habs = HabilidadeRequerida.objects.filter(pesquisador=pesquer, tipo="pesquisador")
     return HabilidadeRequeridaSerializer(habs, many=True).data
 
     
