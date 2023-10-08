@@ -49,6 +49,13 @@ class ProjetoApiView(APIView):
         serializer = ProjetoSerializer(proj, context={'request': request}, many=False)
         return Response(serializer.data)
 
+    @api_view(['POST'])
+    def pegar_projetos_pesquisador(request):
+        dados = request.data
+        pesquer = Pesquisador.objects.get(apelido=dados["apelido"])
+        proj = Projeto.objects.filter(dono=pesquer)
+        serializer = ProjetoSerializer(proj, context={'request': request}, many=True)
+        return Response(serializer.data)
     
     @api_view(['POST'])
     def apagar_projetos(request):
