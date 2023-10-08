@@ -3,6 +3,7 @@ from .serializers import HabilidadeRequeridaSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from projetos.models import Publicacao
+from pesquisadores.models import Pesquisador
 
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
@@ -18,8 +19,8 @@ def _get_habilidades_pub(pub):
     habs = HabilidadeRequerida.objects.filter(publicacao=pub, tipo="publicacao")
     return HabilidadeRequeridaSerializer(habs, many=True).data
 
-def _get_habilidades_pesquisador(pub):
-    habs = HabilidadeRequerida.objects.filter(publicacao=pub, tipo="pesquisador")
+def _get_habilidades_pesquisador(pesquer):
+    habs = HabilidadeRequerida.objects.filter(publicacao=pesquer, tipo="pesquisador")
     return HabilidadeRequeridaSerializer(habs, many=True).data
 
     
@@ -37,3 +38,9 @@ class HabilidadeApiView(APIView):
         dados = request.data
         pub = Publicacao.objects.get(codigo=dados["publicacao"])
         return Response(_get_habilidades_pub(pub=pub), status=status.HTTP_200_OK)
+    
+     @api_view(['POST'])
+    def pegar_habilidades_pesquer(request):
+        dados = request.data
+        pesquer = Pesquisador.objects.get(codigo=dados["pesquisador"])
+        return Response(_get_habilidades_pub(pesquer=pesquer), status=status.HTTP_200_OK)

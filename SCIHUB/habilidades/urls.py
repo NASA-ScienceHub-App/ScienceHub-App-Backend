@@ -8,5 +8,6 @@ from .views import HabilidadeApiView
 urlpatterns = [
     path('cadastrar-habilidade/', HabilidadeApiView.cadastrar_habilidade, name='cadastrar-habilidade'),
     path('pegar-habilidade-pub/', HabilidadeApiView.pegar_habilidades_pub, name='pegar-habilidade-pub'),
+    path('pegar-habilidade-pesquer/', HabilidadeApiView.pegar_habilidades_pesquer, name='pegar-habilidade-pesquer'),
     
 ]
