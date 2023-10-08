@@ -24,9 +24,8 @@ class Projeto(models.Model):
             
 class Publicacao(models.Model):
     TIPOS = [
-        ("novidade", "novidade"),
-        ("pedido_ajuda", "pedido_ajuda"),
-        ("agradecimento", "agradecimento")
+        ("Noticia", "Noticia"),
+        ("Recrutamento", "Recrutamento")
     ]
     projeto = models.ForeignKey(Projeto,on_delete=models.CASCADE)
     tipo = models.CharField(max_length=50, choices=TIPOS),
