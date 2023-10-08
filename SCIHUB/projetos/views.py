@@ -85,29 +85,28 @@ class PublicacaoApiView(APIView):
         pubs_feed = []
         for pub in pubs:
             json = {}
-            json["projeto"] = pub.projeto
-            proj = Projeto.objects.get(codigo=pub.projeto)
-            json["nome_projeto"] = proj.nome
-            pesquer = Pesquisador.objects.get(proj.dono)
+            json["projeto"] = pub.projeto.codigo
+            proj = pub.projeto
+            pesquer = proj.dono
             json["autor"] = pesquer.nome
             json["tipo"] = pub.tipo
             json["titulo"] = pub.titulo
             json["descricao"] = pub.descricao
             json["habilidades"] = _get_habilidades_pub(pub=pub)
             pubs_feed.append(json)
-        
+
         return Response(pubs_feed, status=status.HTTP_200_OK)
     
     @api_view(['POST'])
     def pegar_pubs_proj(request):
         dados = request.data
         proj = Projeto.objects.get(codigo=dados["codigo"])
-        pesquer = Pesquisador.objects.get(proj.dono)
+        pesquer = proj.dono
         pubs = Publicacao.objects.filter(projeto__in=proj)
         pubs_proj = []
         for pub in pubs:
             json = {}
-            json["projeto"] = pub.projeto
+            json["projeto"] = pub.projeto.codigo
             json["nome_projeto"] = proj.nome
             json["autor"] = pesquer.nome
             json["tipo"] = pub.tipo

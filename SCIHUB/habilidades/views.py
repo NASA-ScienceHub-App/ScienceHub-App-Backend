@@ -36,4 +36,4 @@ class HabilidadeApiView(APIView):
     def pegar_habilidades_pub(request):
         dados = request.data
         pub = Publicacao.objects.get(codigo=dados["publicacao"])
-        return Response(_get_habilidades_pub(), status=status.HTTP_200_OK)
+        return Response(_get_habilidades_pub(pub=pub), status=status.HTTP_200_OK)
