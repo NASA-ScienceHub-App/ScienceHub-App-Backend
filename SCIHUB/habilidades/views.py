@@ -29,8 +29,12 @@ class HabilidadeApiView(APIView):
     @api_view(['POST'])
     def cadastrar_habilidade(request):
         dados = request.data
-        pub = Publicacao.objects.get(codigo=dados["publicacao"])
-        _cadastrar_habilidade(pub, dados["habilidade"], dados["nivel"])
+        if "publicacao" in dados:
+            pub = Publicacao.objects.get(codigo=dados["publicacao"])
+            _cadastrar_habilidade(pub, dados["habilidade"], dados["nivel"])
+        elif "pesquisador" in dados:
+            pesquer = Pesquisador.objects.get(apelido=dados["pesquisador"])
+            _cadastrar_habilidade(pub, dados["habilidade"], dados["nivel"], "pesquisador")
         return Response("Project created", status=status.HTTP_201_CREATED)
     
     @api_view(['POST'])
