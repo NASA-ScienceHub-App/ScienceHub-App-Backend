@@ -11,7 +11,7 @@ from habilidades.views import _get_habilidades_pub
 
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
-    
+
 class ProjetoApiView(APIView):
     @api_view(['POST'])
     def cadastrar_projeto(request):
@@ -80,6 +80,7 @@ class PublicacaoApiView(APIView):
             json = {}
             json["projeto"] = pub.projeto
             proj = Projeto.objects.get(codigo=pub.projeto)
+            json["nome_projeto"] = proj.nome
             pesquer = Pesquisador.objects.get(proj.dono)
             json["autor"] = pesquer.nome
             json["tipo"] = pub.tipo

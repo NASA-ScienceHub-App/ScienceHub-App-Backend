@@ -14,7 +14,7 @@ def _cadastrar_habilidade(pub, habilidade, nivel):
     return True
     
 def _get_habilidades_pub(pub):
-    habs = HabilidadeRequerida.objects.filter(publicacao=pub)
+    habs = HabilidadeRequerida.objects.filter(publicacao=pub, tipo="publicacao")
     return HabilidadeRequeridaSerializer(habs, many=True).data
     
 
