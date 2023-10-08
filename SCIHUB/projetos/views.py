@@ -116,3 +116,21 @@ class PublicacaoApiView(APIView):
             pubs_proj.append(json)
             
         return Response(pubs_proj, status=status.HTTP_200_OK)
+
+    # pegar issues (que são publicações do tipo "recrutamento") a
+    @api_view(['POST'])
+    def pegar_tarefas(request):
+        codigo = request.data["codigo"]
+        try:
+            # pegar todas as publicações que são do tipo "recrutamento"
+            pubs_recrutamento = Publicacao.objects.filter(tipo="recrutamento")
+            
+            # filtrar quais são de um determinado projeto (codigo)
+            pubs_recrutamento_proj = pubs_recrutamento.filter(projeto__codigo=codigo)
+
+            print(pubs_recrutamento_proj)
+
+            return Response(pubs_recrutamento_proj, status=status.HTTP_200_OK)
+
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
