@@ -8,11 +8,11 @@ class HabilidadeRequerida(models.Model):
         ("Avançado", "Avançado"),
     ]
     TIPO = [
-        ("usuario", "usuario"),
+        ("pesquisador", "pesquisador"),
         ("publicacao", "publicacao")
     ]
     publicacao = models.ForeignKey(Publicacao,on_delete=models.CASCADE, blank=True, null=True)
-    usuario = models.ForeignKey(Pesquisador,on_delete=models.CASCADE, blank=True, null=True)
+    pesquisador = models.ForeignKey(Pesquisador,on_delete=models.CASCADE, blank=True, null=True)
     tipo = models.CharField(max_length=127, default="publicacao",choices=TIPO)
     habilidade = models.CharField(max_length=127, blank=True)
     nivel_da_habilidade = models.CharField(max_length=127, choices=NIVEIS)

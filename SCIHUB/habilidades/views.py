@@ -18,6 +18,10 @@ def _get_habilidades_pub(pub):
     habs = HabilidadeRequerida.objects.filter(publicacao=pub, tipo="publicacao")
     return HabilidadeRequeridaSerializer(habs, many=True).data
 
+def _get_habilidades_pesquisador(pub):
+    habs = HabilidadeRequerida.objects.filter(publicacao=pub, tipo="pesquisador")
+    return HabilidadeRequeridaSerializer(habs, many=True).data
+
     
 
 class HabilidadeApiView(APIView):
