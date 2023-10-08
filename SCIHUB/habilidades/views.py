@@ -39,7 +39,7 @@ class HabilidadeApiView(APIView):
         pub = Publicacao.objects.get(codigo=dados["publicacao"])
         return Response(_get_habilidades_pub(pub=pub), status=status.HTTP_200_OK)
     
-     @api_view(['POST'])
+    @api_view(['POST'])
     def pegar_habilidades_pesquer(request):
         dados = request.data
         pesquer = Pesquisador.objects.get(codigo=dados["pesquisador"])
