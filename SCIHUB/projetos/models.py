@@ -11,7 +11,7 @@ class Projeto(models.Model):
     # nick do criador +( + /)? + nome
     criacao = models.DateTimeField(auto_now_add=True)
     nome = models.CharField(max_length=127)
-    descricao = models.CharField(max_length=511)
+    descricao = models.CharField(max_length=1023)
     # foto
     dono = models.ForeignKey(Pesquisador,on_delete=models.CASCADE, null=True)
     
