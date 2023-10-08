@@ -11,6 +11,6 @@ urlpatterns = [
     
     path('cadastrar-publicacao/', PublicacaoApiView.cadastrar_publicacao, name='cadastrar-publicacao'),
     path('feed-pesquisador/', PublicacaoApiView.pegar_pubs_feed_pesquisador, name='pegar-pubs-feed-pesquisador'),
-    path('publicacao-projeto/', PublicacaoApiView.pegar_pubs_proj, name='pegar-pubs-proj'),
+    path('publicacoes-recrutamento-projeto/', PublicacaoApiView.pegar_pubs_proj, name='pegar-pubs-proj'),
     
 ]

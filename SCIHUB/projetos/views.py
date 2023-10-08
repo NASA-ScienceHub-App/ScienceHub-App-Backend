@@ -102,7 +102,7 @@ class PublicacaoApiView(APIView):
         dados = request.data
         proj = Projeto.objects.get(codigo=dados["codigo"])
         pesquer = proj.dono
-        pubs = Publicacao.objects.filter(projeto__in=proj)
+        pubs = Publicacao.objects.filter(projeto__in=proj, tipo="Recrutamento")
         pubs_proj = []
         for pub in pubs:
             json = {}
